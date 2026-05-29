@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rule-Based Chatbot</title>
+    <style>
+      body { font-family: Arial, sans-serif; background: #f4f7f9; color: #333; margin: 0; padding: 0; }
+      .container { max-width: 700px; margin: 40px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+      h1 { margin-top: 0; }
+      .chat { margin-top: 20px; }
+      .bubble { padding: 16px; border-radius: 14px; margin-bottom: 14px; width: fit-content; max-width: 90%; }
+      .user { background: #3b82f6; color: white; margin-left: auto; }
+      .bot { background: #e5e7eb; color: #111827; }
+      .input-area { display: flex; margin-top: 20px; gap: 10px; }
+      .input-area input { flex: 1; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; }
+      .input-area button { background:#2563eb; color:white; border:none; padding:12px 18px; border-radius:8px; cursor:pointer; }
+      .input-area button:hover { background:#1d4ed8; }
+      .footer { margin-top: 24px; font-size: 14px; color: #6b7280; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Rule-Based Chatbot</h1>
+      <p>A simple chatbot for internship practice that runs in the browser.</p>
+      <div class="chat">
+        <div class="bubble bot">Bot: {{ bot_reply }}</div>
+        {% if user_text %}
+          <div class="bubble user">You: {{ user_text }}</div>
+        {% endif %}
+      </div>
+      <form method="post" class="input-area">
+        <input name="user_input" placeholder="Ask me something..." value="{{ user_text }}" autofocus />
+        <button type="submit">Send</button>
+      </form>
+      <div class="footer">Try questions like: hello, time, weather, internship advice, project tips, or exit.</div>
+    </div>
+  </body>
+</html>
