@@ -18,6 +18,7 @@ This project demonstrates a rule-based chatbot that answers user questions using
 - Recognizes time, weather, jokes, and internship-related questions
 - Provides career and project advice for internship preparation
 - Runs as a terminal chatbot or as a browser-based web app
+- Supports browser chat history and a clear-chat button in the web UI
 
 ## Installation
 

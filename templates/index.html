@@ -24,14 +24,16 @@
       <h1>Rule-Based Chatbot</h1>
       <p>A simple chatbot for internship practice that runs in the browser.</p>
       <div class="chat">
-        <div class="bubble bot">Bot: {{ bot_reply }}</div>
-        {% if user_text %}
-          <div class="bubble user">You: {{ user_text }}</div>
-        {% endif %}
+        {% for message in conversation %}
+          <div class="bubble {{ 'user' if message.role == 'user' else 'bot' }}">
+            {{ 'You:' if message.role == 'user' else 'Bot:' }} {{ message.text }}
+          </div>
+        {% endfor %}
       </div>
       <form method="post" class="input-area">
         <input name="user_input" placeholder="Ask me something..." value="{{ user_text }}" autofocus />
         <button type="submit">Send</button>
+        <button type="submit" formaction="{{ url_for('clear_chat') }}" formmethod="post" style="background:#ef4444;">Clear</button>
       </form>
       <div class="footer">Try questions like: hello, time, weather, internship advice, project tips, or exit.</div>
     </div>

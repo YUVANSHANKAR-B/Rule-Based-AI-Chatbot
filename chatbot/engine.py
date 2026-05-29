@@ -1,4 +1,5 @@
 import datetime
+import re
 from .responses import random_response
 from .rules import (
     EXIT_KEYWORDS,
@@ -21,7 +22,21 @@ from .rules import (
 
 
 def _contains_keyword(user_input: str, keywords: list[str]) -> bool:
-    return any(keyword in user_input for keyword in keywords)
+    tokens = re.findall(r"\b[\w']+\b", user_input)
+
+    for keyword in keywords:
+        if " " in keyword:
+            if re.search(rf"\b{re.escape(keyword)}\b", user_input):
+                return True
+        else:
+            if keyword in tokens:
+                return True
+            if keyword + "s" in tokens:
+                return True
+            if keyword.endswith("y") and keyword[:-1] + "ies" in tokens:
+                return True
+
+    return False
 
 
 def get_help_text() -> str:
