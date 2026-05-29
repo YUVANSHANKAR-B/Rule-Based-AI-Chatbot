@@ -2,7 +2,15 @@ from flask import Flask, request, render_template, session, redirect, url_for
 from chatbot import get_response, is_exit_command, get_help_text
 
 app = Flask(__name__)
-app.secret_key = "dev-secret-key"
+import os
+
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
+
+# Production configuration
+if os.environ.get('FLASK_ENV') == 'production':
+    app.config['SESSION_COOKIE_SECURE'] = True
+    app.config['SESSION_COOKIE_HTTPONLY'] = True
+    app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
 
 def add_message(role: str, text: str) -> None:
